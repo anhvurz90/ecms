@@ -1,15 +1,49 @@
 <%
-/**
-* Created by The eXo Platform SAS
-* Author : eXoPlatform
-* chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
-* Dec 15, 2009
-*/
+    /**
+     * Created by The eXo Platform SAS
+     * Author : eXoPlatform
+     *          chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
+     * Dec 15, 2009
+     */
+ 
+    import javax.jcr.ValueFormatException;
+ 
+    def currentNode = uicomponent.getNode();
+    def childNode = uicomponent.getChildNode();
 %>
 <div class="$uicomponent.id">
-<div style="color: red; font-weight: bold; font-size: 20px;">
-<%= uicomponent.getText() %> </br>
-<%= uicomponent.getChecboxName() %> </br>
-<%= uicomponent.getDatetime() %> </br>
-</div>
+    <div class="Text"><%= uicomponent.getText() %></div>
+    <div class="Node">
+        <b>Node name: </b> <%= currentNode.getName() %><br/>
+        <b>Node path: </b> <%= currentNode.getPath() %>
+    </div>
+    <%
+        for(node in childNode) {
+            def properties = node.getProperties();
+            %>
+                <div class="ChildNode">
+                    <b>Child node name: </b> <%= node.getName() %>
+                    <%
+                        while(properties.hasNext()) {
+                            %>
+                                <div class="ChildNodeProperty">
+                                    <%
+                                        def property = properties.nextProperty();
+                                        try{
+                                            def values = property.getValues();
+                                            for (value in values) {
+                                                %><b><%= property.getName() %>: </b><%= value.getString() %><br/><%
+                                            }
+                                        } catch(ValueFormatException e) {
+                                            %><b><%= property.getName() %>: </b><%= property.getString() %><%
+                                        }
+                                    %>
+                                </div>
+                            <%
+                        }
+                    %>
+                </div>
+            <%
+        }
+    %>
 </div>

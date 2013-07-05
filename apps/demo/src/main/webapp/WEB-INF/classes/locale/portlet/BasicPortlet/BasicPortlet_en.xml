@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
-<UIBasicPortlet></UIBasicPortlet>
+  <UIBasicConfig>
+    <label>
+      <UIBasicPortletTextStringInput>Text</UIBasicPortletTextStringInput>
+      <UIBasicPortletPathStringInput>Node path</UIBasicPortletPathStringInput>
+      <UIBasicPortletNameStringInput>Name</UIBasicPortletNameStringInput>
+      <UIBasicPortletBirthdayDateInput>Date Of Birth</UIBasicPortletBirthdayDateInput>
+      <UIBasicPortletSingleBooleanInput>Single</UIBasicPortletSingleBooleanInput>
+      <UIBasicPortletSalaryLongInput>Salary</UIBasicPortletSalaryLongInput>
+      <UIBasicPortletTeamStringInput>Team</UIBasicPortletTeamStringInput>
+    </label>
+    <action>
+      <ShowNodes>Show nodes</ShowNodes>
+      <Save>Add node</Save>
+      <Cancel>Cancel</Cancel>
+    </action>
+  </UIBasicConfig>
 </bundle>

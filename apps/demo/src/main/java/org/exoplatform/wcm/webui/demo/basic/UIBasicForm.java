@@ -17,9 +17,13 @@
 package org.exoplatform.wcm.webui.demo.basic;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.jcr.Node;
 import javax.portlet.PortletPreferences;
 
+import org.exoplatform.services.wcm.demo.basic.DemoService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -36,20 +40,38 @@ import org.exoplatform.webui.core.lifecycle.Lifecycle;
      lifecycle  = Lifecycle.class, 
      template   = "app:/groovy/webui/BasicPortlet/UIBasicForm.gtmpl")
 public class UIBasicForm extends UIComponent {
-  private String text;
-  private String checboxName;
-  private String datetime;
-  private CheckboxInfo checkboxInfo;
   
+  private String text;
+  
+  private Node node;
+  private List<Node> childNode;
+  private DemoService demoService;
+  
+  private String name;
+  private Date dateOfBirth;
+  private Boolean single;
+  private Long salary;
+  private String team;
+  
+  public UIBasicForm() {
+    // create service by WCM util
+    demoService = WCMCoreUtils.getService(DemoService.class);
+  }
+
   public void init() {
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
     
     PortletPreferences preferences = portletRequestContext.getRequest().getPreferences();
     
     text        = preferences.getValue(UIBasicPortlet.TEXT_PREFERENCE, null);
-    checboxName = preferences.getValue(UIBasicPortlet.CHECKBOX_PREFERENCE, String.valueOf(false));
-    datetime    = preferences.getValue(UIBasicPortlet.DATETIME_PREFERENCE, new Date().toString());
-        
+    
+    String path = preferences.getValue(UIBasicPortlet.PATH_PREFERENCE, null);
+    node        = demoService.getOneNode(path);
+    childNode   = demoService.getChildNode(path);
+    
+    /*******EMPLOYEE node************/
+    
+    
   }
   
   public void processRender(WebuiRequestContext context) throws Exception {
@@ -65,31 +87,67 @@ public class UIBasicForm extends UIComponent {
     this.text = text;
   }
 
-  public String getChecboxName() {
-    return checboxName;
+  public Node getNode() {
+    return node;
   }
 
-  public void setChecboxName(String checboxName) {
-    this.checboxName = checboxName;
+  public void setNode(Node node) {
+    this.node = node;
   }
 
-  public String getDatetime() {
-    return datetime;
+  public List<Node> getChildNode() {
+    return childNode;
   }
 
-  public void setDatetime(String datetime) {
-    this.datetime = datetime;
+  public void setChildNode(List<Node> childNode) {
+    this.childNode = childNode;
   }
 
-  public CheckboxInfo getCheckboxInfo() {
-    return checkboxInfo;
+  public DemoService getDemoService() {
+    return demoService;
   }
 
-  public void setCheckboxInfo(CheckboxInfo checkboxInfo) {
-    this.checkboxInfo = checkboxInfo;
+  public void setDemoService(DemoService demoService) {
+    this.demoService = demoService;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public Date getDateOfBirth() {
+    return dateOfBirth;
+  }
+
+  public void setDateOfBirth(Date dateOfBirth) {
+    this.dateOfBirth = dateOfBirth;
+  }
+
+  public Boolean getSingle() {
+    return single;
+  }
+
+  public void setSingle(Boolean single) {
+    this.single = single;
+  }
+
+  public Long getSalary() {
+    return salary;
+  }
+
+  public void setSalary(Long salary) {
+    this.salary = salary;
+  }
+
+  public String getTeam() {
+    return team;
+  }
+
+  public void setTeam(String team) {
+    this.team = team;
   }
 }
-
-
-
-

@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
-<UIBasicPortlet></UIBasicPortlet>
+  <UIBasicConfig>
+    <label>
+      <UIBasicPortletTextStringInput>Texte</UIBasicPortletTextStringInput>
+      <UIBasicPortletPathStringInput>Le chemin de la node</UIBasicPortletPathStringInput>
+    </label>
+    <action>
+      <Save>Sauver</Save>
+      <Cancel>Annuler</Cancel>
+    </action>
+  </UIBasicConfig>
 </bundle>

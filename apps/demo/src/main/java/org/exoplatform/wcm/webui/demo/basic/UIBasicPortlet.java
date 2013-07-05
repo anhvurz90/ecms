@@ -16,6 +16,8 @@
  */
 package org.exoplatform.wcm.webui.demo.basic;
 
+import java.util.Date;
+
 import javax.portlet.PortletMode;
 
 import org.exoplatform.webui.application.WebuiApplication;
@@ -32,13 +34,17 @@ import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 @ComponentConfig(lifecycle = UIApplicationLifecycle.class)
 public class UIBasicPortlet extends UIPortletApplication {
 
-  public static final String TEXT_PREFERENCE = "text";
-  public static final String CHECKBOX_PREFERENCE = "checkbox";
-  public static final String DATETIME_PREFERENCE = "datetime";
-
+  public static final String PATH_PREFERENCE    = "path";
+  public static final String TEXT_PREFERENCE    = "text";
+  
+  public static final String NAME_PREFERENCE    = "name";
+  public static final String DATE_PREFERENCE    = "dateOfBirth";
+  public static final String SINGLE_PREFERENCE  = "single";
+  public static final String SALARY_PREFERENCE  = "salary";
+  public static final String TEAM_PREFERENCE    = "team";
+  
   public UIBasicPortlet() throws Exception {
     super();
-    // TODO Auto-generated constructor stub
   }
 
   public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
@@ -53,5 +59,5 @@ public class UIBasicPortlet extends UIPortletApplication {
     }
     super.processRender(app, context);
   }
-
+  
 }
